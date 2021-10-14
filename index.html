@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <meta charset="utf-8">
+    <head>
+        <title>그래프</title>     
+        <!--css-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
+        <link rel="stylesheet" href="assets/tether/tether.min.css">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+        <link rel="stylesheet" href="assets/theme/css/style.css">
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap">
+        </noscript>
+        <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+
+        <!--chart.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.0/chart.min.js" integrity="sha512-lkEx3HSoujDP3+V+i46oZpNx3eK67QPiWiCwoeQgR1I+4kutWAuOSs3BxEUZt4U/mUfyY5uDHlypuQ1HHKVykA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!--chartjs-plugin-zoom-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.1.1/chartjs-plugin-zoom.min.js" integrity="sha512-NxlWEbNbTV6acWnTsWRLIiwzOw0IwHQOYUCKBiu/NqZ+5jSy7gjMbpYI+/4KvaNuZ1qolbw+Vnd76pbIUYEG8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!--제이쿼리 적용방법 3 -->
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+   
+        <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+
+        <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+            #chart_ageData{
+                    text-align: center;
+                }
+          </style>
+
+
+
+    </head>
+    <script src="./chart.js"></script>
+<div>
+    
+    <select  id="selectBox_year" name="year" onchange="change_year_Type(this)" class="btn btn-white display-4">
+        <option value="0" selected >년도</option>
+        <option value="1">2021</option>
+        <option value="2">2020</option>
+        <option value="3">2019</option>
+        <option value="4">2018</option>
+        
+    </select>
+
+    <select  id="selectBox" name="quarter" onchange="change_quarter_Type(this)" class="btn btn-white display-4">
+        <option value="0" selected >분기</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+
+    <select  id="selectBox" name="area" onchange="change_area_Type(this)"class="btn btn-white display-4">
+        <option value="0" selected >상권</option>
+        <option value="R">전통시장</option>
+        <option value="A">골목상권</option>
+        <option value="D">발달상권</option>
+        <option value="U">관광특구</option>
+    </select>
+
+    <select  id="selectBox" name="detail_area" onchange="change_detail_area_Type(this)" class="btn btn-white display-4">
+        <option value="0" selected >위치</option>
+        <option value="1001060">가락시장</option>
+        <option value="1000507">가로공원로58길</option>
+        <option value="1000552">가로공원로76가길</option>
+        <option value="1000553">가로공원로80길</option>
+        <option value="1001419">가리봉시장</option>
+        <option value="1000683">가마산로61길</option>
+    </select>
+
+    <select  id="selectBox" name="sector" onchange="change_sector_Type(this)" class="btn btn-white display-4">
+        <option value="0" selected >업종</option>
+        <option value="CS200019">PC방</option>
+        <option value="CS300031">가구</option>
+        <option value="CS300015">가방</option>
+        <option value="CS300032">가전제품</option>
+        <option value="CS200032">가전제품수리</option>
+        <option value="CS200036">고시원</option>
+    </select>
+    <!-- <button id="ready" onclick="resetCanvas();" class="btn btn-white display-4" >검색하기</button> -->
+    <!-- <button id="start" onclick="getchart();" class="btn btn-white display-4">결과보기</button> -->
+    <a class="btn btn-white display-4" onclick="getchart();">
+        <div class="mobi-mbri mobi-mbri-edit-2 mbr-iconfont mbr-iconfont-btn"></div>
+    </a>
+</div>
+<div>
+    <div id ="chart1" style="width: 500px; height: 300px; float: left; ">
+        <!--차트가 그려질 부분-->
+        <canvas id="chart_genderData" style="cursor: crosshair;width: 500px; height: 300px;"> </canvas>  
+    </div>
+
+    <div id ="chart2"  style="width: 500px; height: 300px; float: left; ">
+        <!--차트가 그려질 부분-->        
+        <canvas id="chart_dayData" style="cursor: crosshair; width: 500px; height: 300px;"> </canvas> 
+       
+    </div>
+</div>
+<div>
+    <div id ="chart3" style="width: 500px; height: 300px;  float: left;">
+        <!--차트가 그려질 부분-->       
+        <canvas id="chart_timeData" style="cursor: crosshair; width: 500px; height: 300px; "> </canvas> 
+       
+    </div>
+
+    <div id ="chart4" style="width: 300px; height: 300px; float: left;">
+        <!--차트가 그려질 부분-->
+        <canvas id="chart_ageData" style="cursor: crosshair; width: 300px; height: 300px;"> </canvas> 
+    </div>
+
+</div>
+
+<script src="./chart.js"></script>
+
+</body>
+</html>
